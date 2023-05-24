@@ -1,23 +1,35 @@
 import { useCallback, useState } from "react";
 import { isProjectResponse, isProjectData } from "../schemas";
+import { useAppDispatch, useAppSelector } from "../store";
 
 const API_URL = 'http://recruitment01.vercel.app/api'
 
+type FetchState = {
+  type: 'none'
+} | {
+  type: 'loading'
+} | {
+  type: 'error',
+  error: Error
+}
+
 export function useProject() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<Error>()
+  const dispatch = useAppDispatch()
+  const project = useAppSelector(({ project }) => project)
+  const [fetchState, setFetchState] = useState<FetchState>({ type: 'none' })
 
   const loadProject = useCallback((projectId: string) => {
-    setError(undefined)
-    setIsLoading(true)
+    setFetchState({ type: 'loading' })
 
     fetchProject(projectId)
-      .then((project) => console.log(project))
-      .catch(error => setError(error))
-      .finally(() => setIsLoading(false))
-  }, [setIsLoading, setError])
+      .then((project) => {
+        dispatch({ type: 'SET_PROJECT', payload: project })
+        setFetchState({ type: 'none' })
+      })
+      .catch(error => setFetchState({ type: 'error', error }))
+  }, [setFetchState, dispatch])
 
-  return { loadProject, isLoading, error }
+  return { loadProject, fetchState, project }
 }
 
 async function fetchProject (projectId: string) {

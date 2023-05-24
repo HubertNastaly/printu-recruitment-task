@@ -1,16 +1,19 @@
 import { useState } from "react"
 import { useProject } from "./hooks"
+import { Canva } from "./components"
 
 const App = () => {
   const [projectId, setProjectId] = useState('')
-  const { loadProject, isLoading, error } = useProject()
+  const { loadProject, fetchState, project } = useProject()
 
   return (
     <>
       <input value={projectId} onChange={event => setProjectId(event.target.value)} />
       <button onClick={() => loadProject(projectId)}>Load project</button>
-      {isLoading && <span>Loading...</span>}
-      {error && <span>Error: {error.message}</span>}
+      
+      {fetchState.type === 'loading' && <span>Loading...</span>}
+      {fetchState.type === 'error' && <span>Error: {fetchState.error.message}</span>}
+      {fetchState.type === 'none' && <Canva project={project} />}
     </>
   )
 }
