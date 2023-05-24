@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { isProjectResponse, isProjectData } from "../schemas";
 
 const API_URL = 'http://recruitment01.vercel.app/api'
 
@@ -7,7 +8,9 @@ export function useProject() {
   const [error, setError] = useState<Error>()
 
   const loadProject = useCallback((projectId: string) => {
+    setError(undefined)
     setIsLoading(true)
+
     fetchProject(projectId)
       .then((project) => console.log(project))
       .catch(error => setError(error))
@@ -21,9 +24,11 @@ async function fetchProject (projectId: string) {
   projectId ||= await fetchRandomProjectId()
   const response = await fetch(`${API_URL}/project/${projectId}`)
   if(response.ok) {
-    const project = await response.json()
-    // TODO: parse project
-    return project
+    const parsedResponse = await response.json()
+    if(!isProjectResponse(parsedResponse)) {
+      throw new Error(`Invalid response format for project: ${projectId}`)
+    }
+    return parsedResponse.project
   }
   throw responseError(response)
 }
@@ -31,7 +36,11 @@ async function fetchProject (projectId: string) {
 async function fetchRandomProjectId(): Promise<string> {
   const response = await fetch(`${API_URL}/init`)
   if(response.ok) {
-    return (await response.json()).id as string
+    const parsedResponse = await response.json()
+    if(!isProjectData(parsedResponse)) {
+      throw new Error('Invalid response format')
+    }
+    return parsedResponse.id
   }
   throw responseError(response)
 }
