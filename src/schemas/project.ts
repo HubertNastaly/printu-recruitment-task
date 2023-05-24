@@ -9,3 +9,5 @@ export const projectSchema = new yup.ObjectSchema({
   height: positiveNumberSchema,
   items: yup.array(shapeSchema).required()
 })
+
+export type Project = yup.InferType<typeof projectSchema>

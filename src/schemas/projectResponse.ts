@@ -9,6 +9,6 @@ export const projectResponseSchema = new yup.ObjectSchema({
 
 type ProjectResponse = yup.InferType<typeof projectResponseSchema>
 
-export function isProjectResponse(maybeProjectResponse: any): maybeProjectResponse is ProjectResponse {
+export function isProjectResponse(maybeProjectResponse: unknown): maybeProjectResponse is ProjectResponse {
   return projectResponseSchema.isValidSync(maybeProjectResponse)
 }
