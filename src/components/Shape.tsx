@@ -1,19 +1,15 @@
 import { ProjectItem } from "../types"
 
-type Props = ProjectItem
-
-export const Shape = ({ type, ...commonProps }: Props) => {
-  switch(type) {
+export const Shape = (props: ProjectItem) => {
+  switch(props.type) {
     case 'rectangle':
-      return <Rectangle {...commonProps} />
+      return <Rectangle {...props} />
     case 'ellipse':
-      return <Ellipse {...commonProps} />
+      return <Ellipse {...props} />
   }
 }
 
-type CommonProps = Omit<Props, 'type'>
-
-const Rectangle = ({ x, y, width, height, color, rotation }: CommonProps) => {
+const Rectangle = ({ x, y, width, height, color, rotation }: ProjectItem) => {
   const topY = y - height / 2
   const leftX = x - width / 2
 
@@ -29,7 +25,7 @@ const Rectangle = ({ x, y, width, height, color, rotation }: CommonProps) => {
   )
 }
 
-const Ellipse = ({ x, y, width, height, color, rotation }: CommonProps) => {
+const Ellipse = ({ x, y, width, height, color, rotation }: ProjectItem) => {
   return (
     <ellipse
       cx={x}
