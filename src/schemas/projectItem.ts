@@ -2,11 +2,11 @@ import * as yup from 'yup'
 import { positiveNumberSchema, stringSchema } from './primitives'
 
 const COLOR_HEX_PATTERN = new RegExp('^#[0-9a-fA-F]{6}$')
-const SHAPE_TYPE = ['rectangle', 'ellipse'] as const
+const ITEM_TYPE = ['rectangle', 'ellipse'] as const
 
-export const shapeSchema = new yup.ObjectSchema({
+export const projectItemSchema = new yup.ObjectSchema({
   id: stringSchema,
-  type: stringSchema.oneOf(SHAPE_TYPE),
+  type: stringSchema.oneOf(ITEM_TYPE),
   color: stringSchema.matches(COLOR_HEX_PATTERN),
   rotation: yup.number().required().min(0).max(360),
   x: positiveNumberSchema,
@@ -14,3 +14,5 @@ export const shapeSchema = new yup.ObjectSchema({
   width: positiveNumberSchema,
   height: positiveNumberSchema
 })
+
+export type ProjectItem = yup.InferType<typeof projectItemSchema>

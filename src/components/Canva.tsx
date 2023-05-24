@@ -1,9 +1,20 @@
 import { Project } from "../schemas/project"
+import { Shape } from "./Shape"
 
 interface Props {
-  project?: Project
+  project: Project
 }
 
 export const Canva = ({ project }: Props) => {
-  return project ? <span>{project.name}</span> : <span>No project</span>
+  const { id, name, items, width, height } = project
+  return (
+    <div id="canvaWrapper">
+      <span id="projectName">{name} (id: { id })</span>
+      <svg id="canva" viewBox={`0 0 ${width} ${height}`}>
+        {items.map(shape => (
+          <Shape key={shape.id} {...shape} />
+        ))}
+      </svg>
+    </div>
+  )
 }
