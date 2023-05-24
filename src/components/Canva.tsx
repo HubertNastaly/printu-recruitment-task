@@ -1,9 +1,17 @@
 import { Project } from "../schemas/project"
 
 interface Props {
-  project?: Project
+  project: Project
 }
 
 export const Canva = ({ project }: Props) => {
-  return project ? <span>{project.name}</span> : <span>No project</span>
+  const { name } = project
+  return (
+    <div id="canva">
+      <span id="projectName">{name}</span>
+      <svg>
+
+      </svg>
+    </div>
+  )
 }
