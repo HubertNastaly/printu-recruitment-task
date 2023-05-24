@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { isProjectResponse, isProjectData } from "../schemas";
+import { isProjectResponse, isProjectData } from "../types";
 import { useAppDispatch, useAppSelector } from "../store";
 
 const API_URL = 'http://recruitment01.vercel.app/api'

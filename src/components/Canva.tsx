@@ -1,4 +1,4 @@
-import { Project } from "../schemas/project"
+import { Project } from "../types"
 import { getContrastColor } from "../utils/getContrastColor"
 import { Pivot } from "./Pivot"
 import { Shape } from "./Shape"

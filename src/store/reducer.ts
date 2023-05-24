@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Project } from "../schemas/project";
+import { Project } from "../types";
 
 export interface Store {
   project?: Project

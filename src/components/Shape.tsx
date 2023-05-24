@@ -1,4 +1,4 @@
-import { ProjectItem } from "../schemas/projectItem"
+import { ProjectItem } from "../types"
 
 type Props = ProjectItem
 
