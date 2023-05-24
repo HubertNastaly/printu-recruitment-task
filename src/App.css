@@ -55,8 +55,17 @@ button {
 
 #projectName {
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   top: 8px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.pivot {
+  z-index: 3;
+}
+
+.pivotLabel {
+  font-size: 11px;
+  font-family: Arial, Helvetica, sans-serif;
 }

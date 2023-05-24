@@ -1,4 +1,6 @@
 import { Project } from "../schemas/project"
+import { getContrastColor } from "../utils/getContrastColor"
+import { Pivot } from "./Pivot"
 import { Shape } from "./Shape"
 
 interface Props {
@@ -13,6 +15,9 @@ export const Canva = ({ project }: Props) => {
       <svg id="canva" viewBox={`0 0 ${width} ${height}`}>
         {items.map(shape => (
           <Shape key={shape.id} {...shape} />
+        ))}
+        {items.map(({ id, x, y, color, rotation }) => (
+          <Pivot key={id} x={x} y={y} color={getContrastColor(color)} rotation={rotation}  />
         ))}
       </svg>
     </div>
