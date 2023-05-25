@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { ProjectItem } from "../types"
-import { calculateRectangleVertices, findExtremes, rotatePoint } from "../utils"
+import { calculateRectangleVertices, rotatePoint } from "../utils"
 
 interface Props {
   shape: ProjectItem
@@ -35,5 +35,13 @@ const RectangleBoundingBox = ({ shape }: Props) => {
 function calculateRectangleBoundingBox({ x, y, width, height, rotation }: ProjectItem) {
   const vertices = calculateRectangleVertices(x, y, width, height)
   const rotatedVertices = vertices.map(verticle => rotatePoint(verticle, [x, y], rotation))
-  return findExtremes(rotatedVertices)
+  const xValues = rotatedVertices.map(([x]) => x)
+  const yValues = rotatedVertices.map(([,y]) => y)
+
+  return {
+    xMin: Math.min(...xValues),
+    yMin: Math.min(...yValues),
+    xMax: Math.max(...xValues),
+    yMax: Math.max(...yValues)
+  }
 }
