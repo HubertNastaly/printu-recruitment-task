@@ -1,3 +1,3 @@
-export * from './calculateRectangleVertices'
+export * from './calculateRectangleBoundingBox'
+export * from './calculateEllipseBoundingBox'
 export * from './getContrastColor'
-export * from './rotatePoint'
