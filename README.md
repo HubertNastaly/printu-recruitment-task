@@ -1,5 +1,8 @@
 # Zadanie rekrutacyjne
 
+## Uruchomienie
+`yarn && yarn build && yarn vite`
+
 ## Uwagi do autora API
 - ID projektu w końcówce `/project/:id` jest zwracane dwukrotnie 
 - zduplikowane ID kształtów w niektórych projektach
