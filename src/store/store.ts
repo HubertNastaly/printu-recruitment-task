@@ -1,11 +1,10 @@
-import { Dispatch, configureStore } from "@reduxjs/toolkit"
-import { SetProjectAction, DEFAULT_STATE, Store, reducer } from "./reducer"
+import { configureStore } from "@reduxjs/toolkit"
+import { ProjectState, projectReducer } from "./projectSlice"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 
-export const store = configureStore({
-  preloadedState: DEFAULT_STATE,
-  reducer
-})
+type Store = ProjectState
 
-export const useAppDispatch: () => Dispatch<SetProjectAction> = useDispatch
-export const useAppSelector: TypedUseSelectorHook<Store> = useSelector
+export const store = configureStore({ reducer: projectReducer })
+
+export const useTypedDispatch = () => useDispatch<typeof store.dispatch>()
+export const useTypedSelector: TypedUseSelectorHook<Store> = useSelector
