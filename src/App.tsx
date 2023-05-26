@@ -5,7 +5,7 @@ import './App.css'
 
 const App = () => {
   const [projectId, setProjectId] = useState('')
-  const { loadProject, fetchState, project } = useProject()
+  const { loadProject, projectState } = useProject()
 
   return (
     <div id="appWrapper">
@@ -14,10 +14,10 @@ const App = () => {
         <button onClick={() => loadProject(projectId)}>Load project</button>
       </div>
       
-      {fetchState.type === 'loading' && <span>Loading...</span>}
-      {fetchState.type === 'error' && <span>Error: {fetchState.error.message}</span>}
-      {fetchState.type === 'none' && (
-        project ? <Canva project={project} /> : <span>No project</span>
+      {projectState.type === 'loading' && <span>Loading...</span>}
+      {projectState.type === 'error' && <span>Error: {projectState.error}</span>}
+      {projectState.type === 'ok' && (
+        projectState.project ? <Canva project={projectState.project} /> : <span>No project</span>
       )}
     </div>
   )
