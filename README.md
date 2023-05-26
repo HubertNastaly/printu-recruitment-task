@@ -19,6 +19,10 @@
   * pozytywną wartość wysokości i szerokości płótna oraz kształtów
   * poprawny format wartości koloru
   * wartość rotacji z zakresu [0, 360]
+* testy obsługi danych z API (`fetchProject`) przy zamockowanych odpowiedziach:
+  * czy zostanie zwrócony projekt przy poprawnej odpowiedzi (bez podania ID projektu)
+  * czy zostanie zwrócony projekt przy poprawnej odpowiedzi (przy podaniu ID projektu)
+  * czy zostanie rzucony odpowiedni błąd przy niepoprawnym formacie zwróconych danych lub statusie błędu
 
 ### Komponenty
 * testy komponentu `Shape`:
@@ -28,11 +32,6 @@
   * czy jest renderowana prawidłowa, taka sama liczba kształtów, prostokątów ograniczających i środków figur
   * czy etykiety przy środkach figur mają odpowiednie wartości
   * czy prostokąty ograniczające mają atrybuty położenia i wymiarów zgodne z tym, co zwracają funkcje `calculate...BoundingBox`?
-
-### Hook useProject
-* zwracanie błędów dla różnych rodzajów błędów w zamockowanych odpowiedziach z API
-* załadowanie projektu do stanu przy podanym ID projektu
-* załadowanie projektu do stanu bez podanego ID projektu
 
 ### E2E
 * czy po kliknięciu przycisku **Load project** zostanie wyświetlony komponent `Canva` z różnymi elementami svg wewnątrz
