@@ -17,11 +17,11 @@ export const Canva = ({ project }: Props) => {
         {items.map(shape => (
           <Shape key={`shape-${shape.id}`} {...shape} />
         ))}
-        {items.map(({ id, x, y, color, rotation }) => (
-          <Pivot key={`pivot-${id}`} x={x} y={y} color={getContrastColor(color)} rotation={rotation}  />
-        ))}
         {items.map(shape => (
           <BoundingBox key={`bounding-box-${shape.id}`} shape={shape} />
+        ))}
+        {items.map(({ id, x, y, color, rotation }) => (
+          <Pivot key={`pivot-${id}`} x={x} y={y} color={getContrastColor(color)} rotation={rotation}  />
         ))}
       </svg>
     </div>
